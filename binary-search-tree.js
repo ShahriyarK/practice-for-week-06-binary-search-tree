@@ -30,8 +30,9 @@ class BinarySearchTree {
     //   else this.insert(val, currentNode.right);
     // }
 
-
     // Iterative approach
+    // Also the insertion in both cases in log(n) because we are moving down the levels only
+    // i.e. in worst case, we move down the whole height of the tree which is log(n)
     if (!this.root) {
       this.root = new TreeNode(val);
       return;
@@ -39,24 +40,50 @@ class BinarySearchTree {
     const newNode = new TreeNode(val);
     while (currentNode) {
       if (val < currentNode.val) {
+        // check the left subtree
         if (!currentNode.left) {
           currentNode.left = newNode;
           return;
-        }
-        else currentNode = currentNode.left;
+        } else currentNode = currentNode.left;
       } else {
+        // check the right subtree
         if (!currentNode.right) {
           currentNode.right = newNode;
           return;
-        }
-        else currentNode = currentNode.right;
+        } else currentNode = currentNode.right;
       }
     }
   }
 
   search(val) {
     // Your code here
+    let currentNode = this.root;
+    if (!currentNode) return false;
+
+    while (currentNode) {
+      // if the target is found return true
+      if (val === currentNode.val) {
+        return true;
+      } else if (val < currentNode.val) {
+        // if target is less than current node, search the left subtree
+        currentNode = currentNode.left;
+      } else {
+        // if the target is greater than current node, search the right subtree
+        currentNode = currentNode.right;
+      }
+    }
+    return false;
   }
+
+  //recursive search
+  // search(val, currentNode = this.root) {
+  //   if (!currentNode) return false;
+  //   if (currentNode.val === val) return true;
+  //   // if the target is less than current node, recursively search left subtree
+  //   if (val < currentNode.val) return this.search(val, currentNode.left);
+  //   // else if target is greater than current node, recursively search right subtree
+  //   else return this.search(val, currentNode.right);
+  // }
 
   preOrderTraversal(currentNode = this.root) {
     // Your code here
