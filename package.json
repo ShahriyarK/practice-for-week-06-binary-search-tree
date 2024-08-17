@@ -4,7 +4,7 @@
   "description": "",
   "main": "binary-search-tree.js",
   "scripts": {
-    "test": "mocha -bail"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
